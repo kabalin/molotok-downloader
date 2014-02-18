@@ -1,0 +1,20 @@
+{
+    "name": "Molotok Downloader",
+    "version": "0.1",
+    "description": "This plugin allows to download the image files corresponded to Molotok auction item.",
+    "manifest_version": 2,
+    "content_scripts": [ {
+        "js": [ "script.js" ],
+        "matches": [
+            "http://molotok.ru/*"
+        ],
+        "run_at": "document_idle"
+    } ],
+    "permissions": [
+        "http://molotok.ru/*",
+        "downloads"
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    }
+}
