@@ -1,0 +1,9 @@
+div.molotok_downloader {
+    color: #7F7F7F;
+    font-size: 12px;
+    font-weight: bold;
+    float: right;
+    z-index: 40;
+    position: relative;
+    cursor: pointer;
+}

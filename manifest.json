@@ -5,6 +5,7 @@
     "manifest_version": 2,
     "content_scripts": [ {
         "js": [ "script.js" ],
+        "css": ["script.css"],
         "matches": [
             "http://molotok.ru/*"
         ],

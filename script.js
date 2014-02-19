@@ -2,13 +2,14 @@
 var items = document.querySelectorAll("article.offer");
 for (var i = 0; i < items.length; ++i) {
     var downloadDiv = document.createElement('div');
-    downloadDiv.setAttribute('style', "float: right; z-index: 40; position: relative;");
+    downloadDiv.setAttribute('class', 'molotok_downloader');
     downloadDiv.setAttribute('data-id', items[i].getAttribute('data-id'));
     downloadDiv.textContent = 'Download';
     downloadDiv.addEventListener("click", processEvent, false);
 
+    // Insert next to .details element.
     var details = items[i].querySelector("div.details");
-    details.appendChild(downloadDiv);
+    details.parentNode.insertBefore(downloadDiv, details.nextSibling);
 }
 
 function processEvent(e){
