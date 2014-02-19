@@ -5,3 +5,14 @@ chrome.extension.onMessage.addListener(
         }, function(id){});
         return true;
 });
+
+chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
+    var options = {
+        conflict_action: 'overwrite',
+        conflictAction: 'overwrite'
+    };
+    if (localStorage.pathtosave.length) {
+        options.filename = localStorage.pathtosave + '/' +item.filename;
+    }
+    suggest(options);
+});
