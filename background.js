@@ -8,6 +8,7 @@ chrome.extension.onMessage.addListener(
 
 chrome.downloads.onDeterminingFilename.addListener(function(item, suggest) {
     var options = {
+        filename: item.filename,
         conflict_action: 'overwrite',
         conflictAction: 'overwrite'
     };
