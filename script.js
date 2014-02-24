@@ -1,17 +1,20 @@
 var linkText = 'Скачать изображения';
-// Get all items for sale.
-var items = document.querySelectorAll("article.offer");
-// Generate div element, add event and populate them on the page.
-for (var i = 0; i < items.length; ++i) {
-    var downloadDiv = document.createElement('div');
-    downloadDiv.setAttribute('class', 'molotok_downloader');
-    downloadDiv.setAttribute('data-id', items[i].getAttribute('data-id'));
-    downloadDiv.textContent = linkText;
-    downloadDiv.addEventListener('click', processEvent, false);
 
-    // Insert next to .details element.
-    var details = items[i].querySelector("div.details");
-    details.parentNode.insertBefore(downloadDiv, details.nextSibling);
+function populateElements() {
+    // Get all items for sale.
+    var items = document.querySelectorAll('article.offer');
+    // Generate div element, add event and populate them on the page.
+    for (var i = 0; i < items.length; ++i) {
+        var downloadDiv = document.createElement('div');
+        downloadDiv.setAttribute('class', 'molotok_downloader');
+        downloadDiv.setAttribute('data-id', items[i].getAttribute('data-id'));
+        downloadDiv.textContent = linkText;
+        downloadDiv.addEventListener('click', processEvent, false);
+
+        // Insert next to .details element.
+        var details = items[i].querySelector("div.details");
+        details.parentNode.insertBefore(downloadDiv, details.nextSibling);
+    }
 }
 
 function processEvent(e){
@@ -28,3 +31,22 @@ function processEvent(e){
         chrome.runtime.sendMessage({url: url});
     }
 }
+
+// Initial load.
+window.addEventListener('load', populateElements, false);
+
+var listingDiv = document.querySelector('div#listing');
+
+// Update the links after AJAX page changes (e.g. page or sorting change).
+// Create an observer instance.
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    // Re-populate links after AJAX call (listingDiv element content change)
+    if (mutation.type == 'childList' && mutation.addedNodes[0].nodeType == 3) {
+        populateElements();
+    }
+  });
+});
+
+// Pass in the target node, as well as the observer options.
+observer.observe(listingDiv, { childList: true });
