@@ -1,6 +1,6 @@
 var linkText = 'Скачать изображения';
 
-function populateElements() {
+function populateDownloadElements() {
     // Get all items for sale.
     var items = document.querySelectorAll('article.offer');
     // Generate div element, add event and populate them on the page.
@@ -33,27 +33,32 @@ function processEvent(e){
 }
 
 // Initial load.
-window.addEventListener('load', populateElements, false);
+window.addEventListener('load', function() {
+    // Fetch listing.
+    var listingDiv = document.querySelector('div#listing');
+    if (listingDiv) {
+        // We are on search results listing page.
+        populateDownloadElements();
 
-var listingDiv = document.querySelector('div#listing');
-var offerPreviewDiv = document.querySelector('article.offer-preview');
+        // Create an observer instance.
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            // Re-populate links after AJAX call (listingDiv element content change).
+            if (mutation.target.id == 'listing' && mutation.addedNodes[0].nodeType == 3) {
+                populateDownloadElements();
+            }
+            // Add listener to link in the offer preview window (offerPreviewDiv element content change).
+            if (mutation.target.id == 'offer-preview' && mutation.addedNodes[0].nodeType == 3) {
+                var downloadDiv = mutation.target.querySelector('div.molotok_downloader');
+                downloadDiv.addEventListener('click', processEvent, false);
+            }
+          });
+        });
 
-// Update the links after AJAX page changes (e.g. page or sorting change).
-// Create an observer instance.
-var observer = new MutationObserver(function(mutations) {
-  mutations.forEach(function(mutation) {
-    // Re-populate links after AJAX call (listingDiv element content change).
-    if (mutation.target.id == 'listing' && mutation.addedNodes[0].nodeType == 3) {
-        populateElements();
+        // Update the links after AJAX page changes (e.g. page or sorting change).
+        observer.observe(listingDiv, { childList: true });
+        // Add the link on offer preview window display.
+        var offerPreviewDiv = document.querySelector('article.offer-preview');
+        observer.observe(offerPreviewDiv, { childList: true });
     }
-    // Add listener to link in the offer preview window.
-    if (mutation.target.id == 'offer-preview' && mutation.addedNodes[0].nodeType == 3) {
-        var downloadDiv = mutation.target.querySelector('div.molotok_downloader');
-        downloadDiv.addEventListener('click', processEvent, false);
-    }
-  });
-});
-
-// Pass in the target node, as well as the observer options.
-observer.observe(listingDiv, { childList: true });
-observer.observe(offerPreviewDiv, { childList: true });
+}, false);
