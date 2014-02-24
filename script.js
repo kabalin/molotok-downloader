@@ -36,6 +36,7 @@ function processEvent(e){
 window.addEventListener('load', populateElements, false);
 
 var listingDiv = document.querySelector('div#listing');
+var offerPreviewDiv = document.querySelector('article.offer-preview');
 
 // Update the links after AJAX page changes (e.g. page or sorting change).
 // Create an observer instance.
@@ -45,8 +46,14 @@ var observer = new MutationObserver(function(mutations) {
     if (mutation.target.id == 'listing' && mutation.addedNodes[0].nodeType == 3) {
         populateElements();
     }
+    // Add listener to link in the offer preview window.
+    if (mutation.target.id == 'offer-preview' && mutation.addedNodes[0].nodeType == 3) {
+        var downloadDiv = mutation.target.querySelector('div.molotok_downloader');
+        downloadDiv.addEventListener('click', processEvent, false);
+    }
   });
 });
 
 // Pass in the target node, as well as the observer options.
 observer.observe(listingDiv, { childList: true });
+observer.observe(offerPreviewDiv, { childList: true });
