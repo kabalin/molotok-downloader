@@ -41,8 +41,8 @@ var listingDiv = document.querySelector('div#listing');
 // Create an observer instance.
 var observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
-    // Re-populate links after AJAX call (listingDiv element content change)
-    if (mutation.type == 'childList' && mutation.addedNodes[0].nodeType == 3) {
+    // Re-populate links after AJAX call (listingDiv element content change).
+    if (mutation.target.id == 'listing' && mutation.addedNodes[0].nodeType == 3) {
         populateElements();
     }
   });
