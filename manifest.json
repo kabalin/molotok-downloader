@@ -1,7 +1,7 @@
 {
     "name": "Molotok Downloader",
     "version": "0.1",
-    "description": "This plugin allows to download the image files corresponded to Molotok auction item.",
+    "description": "Chrome extension for downloading images from molotok.ru auction website.",
     "manifest_version": 2,
     "content_scripts": [ {
         "js": [ "script.js" ],
