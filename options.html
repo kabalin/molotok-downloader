@@ -9,12 +9,12 @@
     <h1>
       Molotok Downloader
     </h1>
-    <h2>Настройки</h2>
-    <form id="settings">
-      <div>Путь для сохранения файлов:</div>
+    <h2 id="settings"></h2>
+    <form>
+      <div id="path"></div>
       <input type="text" name="pathtosave">
-      <div class="note">Указывается относительно текущего пути сохранения файлов по умолчанию в Chrome. При пустом значении будет использоваться путь по умолчанию.</div>
-      <input type="button" name="save" value="Сохранить">
+      <div id="note"></div>
+      <input id="save" type="button" name="save" value="">
     </form>
   </body>
 </html>

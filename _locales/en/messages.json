@@ -1,0 +1,20 @@
+{
+    "extDescription": {
+        "message": "Chrome extension for downloading images from http://molotok.ru auction website."
+    },
+    "optSettings": {
+        "message": "Settings"
+    },
+    "optPath": {
+        "message": "Path for saving file:"
+    },
+    "optNote": {
+        "message": "Set relatively to the current default download path in Chrome. If left empty, the default download path will be used."
+    },
+    "optSave": {
+        "message": "Save"
+    },
+    "mainLinkText": {
+        "message": "Save images"
+    }
+}

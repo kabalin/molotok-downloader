@@ -17,6 +17,12 @@
 
 // Options page JS routines.
 window.addEventListener('load', function() {
+    // Set language strings.
+    document.getElementById('settings').textContent = chrome.i18n.getMessage("optSettings");
+    document.getElementById('path').textContent = chrome.i18n.getMessage("optPath");
+    document.getElementById('note').textContent = chrome.i18n.getMessage("optNote");
+    document.getElementById('save').value = chrome.i18n.getMessage("optSave");
+
     if (!localStorage.pathtosave) {
         localStorage.pathtosave = '';
     }

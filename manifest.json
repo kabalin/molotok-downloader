@@ -1,7 +1,8 @@
 {
     "name": "Molotok Downloader",
     "version": "0.1",
-    "description": "Chrome extension for downloading images from molotok.ru auction website.",
+    "description": "__MSG_extDescription__",
+    "default_locale": "ru",
     "manifest_version": 2,
     "content_scripts": [ {
         "js": [ "script.js" ],

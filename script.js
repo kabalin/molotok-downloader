@@ -16,8 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 
 // Main script for page modification and events processing.
-var linkText = 'Скачать изображения';
-
 function populateDownloadElements() {
     // Get all items for sale.
     var items = document.querySelectorAll('article.offer');
@@ -26,7 +24,7 @@ function populateDownloadElements() {
         var downloadDiv = document.createElement('div');
         downloadDiv.setAttribute('class', 'molotok_downloader');
         downloadDiv.setAttribute('data-id', items[i].getAttribute('data-id'));
-        downloadDiv.textContent = linkText;
+        downloadDiv.textContent = chrome.i18n.getMessage("mainLinkText");;
         downloadDiv.addEventListener('click', processEvent, false);
 
         // Insert next to .details element.
